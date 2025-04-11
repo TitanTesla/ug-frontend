@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
       product.className = "product";
 
       product.innerHTML = `
-        <div class="product-image" style="background-image: url('https://ug-backend-wkk1.onrender.com ${item.image}'); background-size: cover;"></div>
+        <div class="product-image" style="background-image: url('https://ug-backend-wkk1.onrender.com${item.image}'); background-size: cover;"></div>
         <h3>${item.name}</h3>
         <p>$${item.price}</p>
         <p class="availability">Availability: ${item.quantity}</p>  
