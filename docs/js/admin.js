@@ -667,7 +667,7 @@ document
   const imageFile = imageInput.files[0]
 
   if (!quantity && !price && !imageFile) {
-    alert('Please provide either a new Quantity, Price, Upload Image — or any combination of them.')
+    alert('Please provide either a new Quantity, Price, Upload Image — or any combination of them')
     return
   }
 
