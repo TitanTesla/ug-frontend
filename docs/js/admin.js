@@ -650,55 +650,56 @@ new Chart(pieCtx, {
     })
 
   // === UPDATE PRODUCT ===
-  document
-    .getElementById('update-product-btn')
-    .addEventListener('click', async e => {
-      e.preventDefault()
-      const name = document.getElementById('product-name').value.trim()
-      const category = document.getElementById('Product-category').value
-      const quantity = document.getElementById('product-qty').value.trim()
-      const price = document.getElementById('product-price').value.trim()
+ document
+  .getElementById('update-product-btn')
+  .addEventListener('click', async e => {
+    e.preventDefault()
+    const name = document.getElementById('product-name').value.trim()
+    const category = document.getElementById('Product-category').value
+    const quantity = document.getElementById('product-qty').value.trim()
+    const price = document.getElementById('product-price').value.trim()
 
-      if (!name || !category) {
-        alert('Please enter Product Name and select Category to update.')
-        return
-      }
-
-      const imageFile = imageInput.files[0]
-
-if (!quantity && !price && !imageFile) {
-  alert('Please provide either a new Quantity, Price, Upload or one of those/all.')
-  return
-}
-
-const formData = new FormData()
-formData.append('name', name)
-formData.append('category', category)
-if (quantity) formData.append('quantity', quantity)
-if (price) formData.append('price', price)
-if (imageFile) formData.append('image', imageFile)
-
-try {
-  const response = await fetch(
-    `https://ug-backend-wkk1.onrender.com/api/products/update`,
-    {
-      method: 'PUT',
-      body: formData
+    if (!name || !category) {
+      alert('Please enter Product Name and select Category to update.')
+      return
     }
-  )
 
-  const result = await response.json()
-  if (!response.ok)
-    throw new Error(result.message || 'Failed to update product.')
+    const imageFile = imageInput.files[0]
 
-  alert('Product updated successfully.')
-  await fetchInventoryProducts()
-  inventoryForm.reset()
-  imagePreview.style.display = 'none'
-} catch (err) {
-  console.error('Update error:', err)
-  alert('❌ Failed to update product. Please try again.')
-})
+    if (!quantity && !price && !imageFile) {
+      alert('Please provide either a new Quantity, Price, Upload or one of those/all.')
+      return
+    }
+
+    const formData = new FormData()
+    formData.append('name', name)
+    formData.append('category', category)
+    if (quantity) formData.append('quantity', quantity)
+    if (price) formData.append('price', price)
+    if (imageFile) formData.append('image', imageFile)
+
+    try {
+      const response = await fetch(
+        `https://ug-backend-wkk1.onrender.com/api/products/update`,
+        {
+          method: 'PUT',
+          body: formData
+        }
+      )
+
+      const result = await response.json()
+      if (!response.ok)
+        throw new Error(result.message || 'Failed to update product.')
+
+      alert('Product updated successfully.')
+      await fetchInventoryProducts()
+      inventoryForm.reset()
+      imagePreview.style.display = 'none'
+    } catch (err) {
+      console.error('Update error:', err)
+      alert('❌ Failed to update product. Please try again.')
+    }
+  })
 
   // === INVENTORY FILTER & SORT ===
   let inventoryProducts = []
