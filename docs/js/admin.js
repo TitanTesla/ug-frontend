@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 
   async function updateHighlightCards () {
-    const res = await fetch('http://ug-backend-wkk1.onrender.com/api/sales')
+    const res = await fetch('https://ug-backend-wkk1.onrender.com/api/sales')
     const sales = await res.json()
 
     let totalSalesQty = 0
@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
     suggestionsList.innerHTML = '' // Clear previous
 
     try {
-      const inventoryRes = await fetch('http://ug-backend-wkk1.onrender.com/api/products')
+      const inventoryRes = await fetch('https://ug-backend-wkk1.onrender.com/api/products')
       const inventory = await inventoryRes.json()
 
       const suggestions = []
@@ -437,7 +437,7 @@ new Chart(pieCtx, {
 
     async function fetchSales () {
       try {
-        const res = await fetch('http://ug-backend-wkk1.onrender.com/api/sales')
+        const res = await fetch('https://ug-backend-wkk1.onrender.com/api/sales')
         salesData = await res.json()
         renderSales(salesData)
       } catch (err) {
@@ -565,7 +565,7 @@ new Chart(pieCtx, {
     formData.append('category', productData.category)
     formData.append('image', imageFile)
 
-    const response = await fetch('http://ug-backend-wkk1.onrender.com/api/products', {
+    const response = await fetch('https://ug-backend-wkk1.onrender.com/api/products', {
       method: 'POST',
       body: formData
     })
@@ -630,7 +630,7 @@ new Chart(pieCtx, {
 
       try {
         const response = await fetch(
-          `http://localhost:3000/api/products?name=${encodeURIComponent(
+          `https://ug-backend-wkk1.onrender.com/api/products?name=${encodeURIComponent(
             nameToDelete
           )}&category=${encodeURIComponent(categoryToDelete)}`,
           { method: 'DELETE' }
@@ -671,7 +671,7 @@ new Chart(pieCtx, {
 
       try {
         const response = await fetch(
-          `http://localhost:3000/api/products?name=${encodeURIComponent(
+          `https://ug-backend-wkk1.onrender.com/api/products?name=${encodeURIComponent(
             name
           )}&category=${encodeURIComponent(category)}`,
           {
@@ -703,7 +703,7 @@ new Chart(pieCtx, {
 
   async function fetchInventoryProducts () {
     try {
-      const response = await fetch('http://ug-backend-wkk1.onrender.com/api/products')
+      const response = await fetch('https://ug-backend-wkk1.onrender.com/api/products')
       inventoryProducts = await response.json()
       applyInventoryFilters()
     } catch (error) {
