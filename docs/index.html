@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UG: Skin&Scents</title>
+
+    <!-- Fonts & Icons -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Work+Sans:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/customer.css" />
+  </head>
+
+  <body>
+    <!-- Top Navigation -->
+    <header id="top-shopper">
+      <h1 id="logo">SKIN&SCENTS</h1>
+
+      <form id="search-form">
+        <input type="search" placeholder="Search..." />
+        <button type="submit">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </form>
+
+      <nav>
+        <a href="#home" class="active">Shop</a>
+        <a href="cart.html" id="cart-icon">
+          <i class="fa-solid fa-shopping-cart"></i>
+          <span id="cart-count">0</span>
+        </a>
+        <a href="admin.html">Admin</a>
+      </nav>
+    </header>
+
+    <!-- Sort Options -->
+    <header id="sort-shopper">
+      <form id="sort-form">
+        <div class="filter-group">
+          <label for="Filter">Filter by:</label>
+          <div class="select-wrapper">
+            <select id="Filter" name="Filter">
+              <option value="price" selected>Price</option>
+              <option value="availability">Availability</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <input type="radio" name="sort" id="descending" />
+          <label for="descending">High to Low</label>
+        </div>
+
+        <div>
+          <input type="radio" name="sort" id="ascending" />
+          <label for="ascending">Low to High</label>
+        </div>
+      </form>
+    </header>
+
+    <!-- Product Listings -->
+    <main id="product-list">
+      <section>
+        <h2 id="unisex-collection-header">Unisex Collection</h2>
+        <div class="product-grid"></div>
+      </section>
+
+      <section>
+        <h2 id="Men-grooming-header">Men's Grooming</h2>
+        <div class="product-grid"></div>
+      </section>
+
+      <section>
+        <h2 id="Women-beauty">Women's Beauty</h2>
+        <div class="product-grid"></div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <p>
+        &copy; 2024 SKIN&SCENTS. Curated beauty for every body. All rights
+        reserved.
+      </p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/customer.js" defer></script>
+    <script src="js/inventoryDisplay.js" defer></script>
+  </body>
+</html>

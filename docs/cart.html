@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UG: Your Cart - Skin&Scents</title>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/cart.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Work+Sans:wght@300;400;600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header id="top-shopper">
+    <h1 id="logo">SKIN&SCENTS</h1>
+    <nav>
+      <a href="index.html">Shop</a>
+      <a href="cart.html" id="cart-icon" class="active">
+        <i class="fa-solid fa-shopping-cart"></i>
+        <span id="cart-count">0</span>
+      </a>
+      <a href="admin.html">Admin</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- Sign-up Form Section -->
+    <section class="signup-form">
+      <h2>Sign-up</h2>
+      <form id="checkout-form">
+
+        <!-- Name -->
+        <div class="form-group">
+          <input type="text" name="name" required />
+          <label>Name :</label>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <input type="email" name="email" required />
+          <label>Email :</label>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <input type="password" name="password" required />
+          <label>Password :</label>
+        </div>
+
+        <!-- Gender -->
+        <div class="gender">
+          <label><input type="radio" name="gender" value="Male" checked /> Male</label>
+          <label><input type="radio" name="gender" value="Female" /> Female</label>
+          <label><input type="radio" name="gender" value="PreferNotToSay" /> Prefer Not To Say</label>
+        </div>
+
+        <!-- Location -->
+        <select name="location" required>
+          <option value="">Select Location</option>
+          <option value="Dubai Internet City">Dubai Internet City</option>
+          <option value="Deira">Deira</option>
+          <option value="Jumeirah">Jumeirah</option>
+        </select>
+
+        <!-- Consent -->
+        <div class="consent">
+          <label>Consent to analytics use?</label>
+          <label><input type="radio" name="consent" value="Yes" required /> Yes</label>
+          <label><input type="radio" name="consent" value="No" /> No</label>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit">Checkout</button>
+      </form>
+    </section>
+
+    <!-- Cart Section -->
+    <section class="cart-section">
+      <div class="cart-header">
+        <h3>Your Cart</h3>
+        <p>Total: <strong id="cart-total">$0</strong></p>
+      </div>
+
+      <div class="cart-items" id="cart-items">
+        <!-- Rendered dynamically by cart.js -->
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/cart.js" defer></script>
+</body>
+</html>

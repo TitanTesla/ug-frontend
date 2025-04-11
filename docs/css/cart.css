@@ -1,0 +1,266 @@
+/* ================= BASE RESET ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: #fff;
+  color: #000;
+}
+
+/* ================= HEADER ================= */
+#top-shopper {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: white;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+#logo {
+  font-size: 30px;
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+
+/* Navigation */
+nav {
+  display: flex;
+  gap: 70px;
+}
+
+nav a {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  padding: 8px 12px;
+}
+
+nav a.active {
+  position: relative;
+  font-weight: bold;
+  padding-bottom: 8px;
+}
+
+nav a.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 3px;
+  background-color: black;
+}
+
+#cart-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+#cart-icon i {
+  font-size: 20px;
+  color: black;
+}
+
+#cart-count {
+  font-size: 10px;
+  font-weight: bold;
+  color: white;
+  background-color: red;
+  border-radius: 50%;
+  padding: 3px 7px;
+  position: absolute;
+  top: -1px;
+  right: 1px;
+}
+
+/* ================= MAIN LAYOUT ================= */
+main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 160px;
+  padding: 0 80px;
+  margin-top: 106px;
+}
+
+/* ================= SIGN-UP FORM ================= */
+.signup-form {
+  flex: 1;
+  max-width: 500px;
+}
+
+.signup-form h2 {
+  font-size: 24px;
+  margin-bottom: 30px;
+  color: #222;
+}
+
+/* Form fields */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 20px;
+  width: 300px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 10px;
+  border: none;
+  border-bottom: 1.5px solid #ccc;
+  background: none;
+  outline: none;
+  font-size: 16px;
+}
+
+.form-group label {
+  position: absolute;
+  left: 10px;
+  top: 12px;
+  color: #aaa;
+  font-size: 16px;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+.form-group input:focus + label,
+.form-group input:valid + label {
+  top: -8px;
+  left: 5px;
+  font-size: 12px;
+  color: #1daeff;
+}
+
+/* Gender and Consent */
+.gender,
+.consent {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #444;
+}
+
+.signup-form select {
+  padding: 10px;
+  width: 300px;
+  border: none;
+  border-bottom: 1.5px solid #ccc;
+  background: none;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+/* Submit Button */
+button[type="submit"] {
+  width: 160px;
+  padding: 12px;
+  background: #1daeff;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background: #0097e6;
+}
+
+/* ================= CART SECTION ================= */
+.cart-section {
+  flex: 1;
+  max-width: 400px;
+  margin-top: 120px;
+}
+
+.cart-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 80px;
+  margin-bottom: 10px;
+}
+
+/* Cart List */
+.cart-items {
+  max-height: 300px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px;
+  padding-right: 5px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+/* Scrollbar Styling */
+.cart-items::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cart-items::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.cart-items::-webkit-scrollbar-thumb {
+  background: #aaa;
+  border-radius: 10px;
+}
+
+/* Individual Cart Item */
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}
+
+.cart-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.item-info p {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.item-info span {
+  font-size: 14px;
+}
+
+.qty {
+  font-size: 18px;
+}
+
+.remove {
+  background: red;
+  color: white;
+  border: none;
+  padding: 5px 15px;
+  font-size: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}

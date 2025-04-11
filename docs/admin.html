@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UG: Admin | Skin&Scents</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/admin.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Work+Sans:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <!-- Chart.js Plugins -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header id="top-shopper">
+      <h1 id="logo">Your Business?</h1>
+      <nav>
+        <a href="index.html">Shop</a>
+        <a href="admin.html" class="active">Admin</a>
+        <a href="#" id="logout-btn" style="display: none">Logout</a>
+      </nav>
+    </header>
+
+    <!-- Login Form -->
+    <main id="admin-login">
+      <div class="login-wrapper">
+        <section class="register-box">
+          <h2>Login</h2>
+          <form id="login-form">
+            <div class="form-group">
+              <input type="text" name="name" required />
+              <label>Name</label>
+            </div>
+            <div class="form-group">
+              <input type="password" name="password" required />
+              <label>Password</label>
+            </div>
+            <button type="submit">Log In</button>
+            <div id="login-error" class="error-msg"></div>
+          </form>
+        </section>
+      </div>
+    </main>
+
+    <!-- Admin Dashboard -->
+    <section id="admin-dashboard" style="display: none">
+      <h2 id="dashb-title">Dashboard</h2>
+
+      <!-- Highlight Cards -->
+      <h3>Highlights</h3>
+      <div class="cards">
+        <div class="card">
+          <p>Total Sales</p>
+          <h3 id="total-sales-price">$0</h3>
+          <p>Quantity: <strong id="total-sales-qty">0</strong></p>
+        </div>
+        <div class="card">
+          <p>Most Sold Item</p>
+          <h4 id="most-sold-name">-</h4>
+          <h3 id="most-sold-price">$0</h3>
+          <p>Quantity: <strong id="most-sold-qty">0</strong></p>
+        </div>
+        <div class="card">
+          <p>Least Sold Item</p>
+          <h4 id="least-sold-name">-</h4>
+          <h3 id="least-sold-price">$0</h3>
+          <p>Quantity: <strong id="least-sold-qty">0</strong></p>
+        </div>
+        <div class="card">
+          <p>Top Location</p>
+          <h3 id="top-location">-</h3>
+          <p id="top-location-description">
+            <strong id="top-location-count">0</strong> sales from this area
+          </p>
+        </div>
+        <div class="card">
+          <p>Top Gender</p>
+          <h3 id="top-gender">-</h3>
+          <p>Total: <strong id="top-gender-count">0</strong></p>
+        </div>
+        <div class="card">
+          <p>Most Profitable Product</p>
+          <h4 id="profitable-name">-</h4>
+          <h3 id="profitable-amount">$0</h3>
+        </div>
+        <div class="card">
+          <p>Avg Spend per Customer</p>
+          <h3 id="avg-spend">$0</h3>
+        </div>
+        <div class="card">
+          <p>Recent Sale</p>
+          <h3 id="recent-sale">-</h3>
+        </div>
+        <div class="card">
+          <p>Peak Sales Hour</p>
+          <h3 id="peak-hour">-</h3>
+        </div>
+      </div>
+
+      <!-- Suggestions -->
+      <div id="suggestion-box">
+        <h3 id="suggestion-title">Suggestions</h3>
+        <ul class="suggestions" id="suggestion-list"></ul>
+      </div>
+
+      <p id="consent-note" class="note">
+        🔒 Charts and insights are based on customers who gave consent.
+      </p>
+
+      <!-- Charts -->
+      <div class="chart-section">
+        <canvas id="genderBarChart"></canvas>
+        <canvas id="locationPieChart"></canvas>
+      </div>
+
+      <!-- Sales Table -->
+      <h3>Sales List</h3>
+      <div class="table-section">
+        <div class="table-controls">
+          <input type="text" id="searchSales" placeholder="Search product..." />
+          <select id="sortSalesField">
+            <option value="qty">Quantity</option>
+            <option value="price">Total Price</option>
+          </select>
+          <div class="sort-radios">
+            <label
+              ><input type="radio" name="sortSalesOrder" value="asc" checked />
+              Low to High</label
+            >
+            <label
+              ><input type="radio" name="sortSalesOrder" value="desc" /> High to
+              Low</label
+            >
+            <label
+              ><input type="radio" name="dateSortOrder" value="desc" checked />
+              Recent First</label
+            >
+            <label
+              ><input type="radio" name="dateSortOrder" value="asc" /> Oldest
+              First</label
+            >
+          </div>
+          <button id="download-sales" class="download-btn">
+            <i class="fas fa-download"></i> Download Sales CSV
+          </button>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>SalesID</th>
+                <th>ProductID</th>
+                <th>ProductName</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>TotalPrice</th>
+                <th>Location</th>
+                <th>Gender</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="sales-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Inventory Table -->
+      <h3>Inventory</h3>
+      <div class="table-section">
+        <div class="table-controls">
+          <input
+            type="text"
+            id="searchInventory"
+            placeholder="Search product..."
+          />
+          <select id="sortInventoryField">
+            <option value="qty">Quantity</option>
+            <option value="price">Price</option>
+          </select>
+          <div class="sort-radios">
+            <label
+              ><input
+                type="radio"
+                name="sortInventoryOrder"
+                value="asc"
+                checked
+              />
+              Low to High</label
+            >
+            <label
+              ><input type="radio" name="sortInventoryOrder" value="desc" />
+              High to Low</label
+            >
+          </div>
+          <button id="download-inventory" class="download-btn">
+            <i class="fas fa-download"></i> Download Inventory CSV
+          </button>
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>ProductID</th>
+                <th>Product Name</th>
+                <th>Category</th>
+                <th>Quantity</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody id="inventory-table-body"></tbody>
+          </table>
+        </div>
+
+        <!-- Inventory Form -->
+        <form
+          class="inventory-form"
+          id="inventory-form"
+          enctype="multipart/form-data"
+        >
+          <div class="form-row">
+            <label for="product-name">Product Name</label>
+            <input type="text" id="product-name" name="name" />
+          </div>
+          <div class="form-row split">
+            <div>
+              <label for="product-qty">Quantity</label>
+              <input type="number" id="product-qty" name="quantity" />
+            </div>
+            <div>
+              <label for="product-price">Price</label>
+              <input type="number" id="product-price" name="price" />
+            </div>
+            <div>
+              <label for="Product-category">Category</label>
+              <select id="Product-category" name="category" required>
+                <option value="">--Select--</option>
+                <option value="Men">Men</option>
+                <option value="Women">Women</option>
+                <option value="Unisex">Unisex</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="product-image">Upload Image</label>
+            <input
+              type="file"
+              id="product-image"
+              name="image"
+              accept="image/*"
+              style="display: none"
+            />
+            <img id="image-preview" alt="Image Preview" />
+          </div>
+          <div class="action-buttons">
+            <button type="submit" id="add-product-btn" class="crud-btn">
+              Add
+            </button>
+            <button type="button" id="update-product-btn" class="crud-btn">
+              Update
+            </button>
+            <button type="button" id="delete-product-btn" class="crud-btn">
+              Delete
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+<script src="js/admin.js" defer></script>
+  </body>
+</html>
