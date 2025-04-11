@@ -51,8 +51,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const product = document.createElement("div");
       product.className = "product";
 
+      const imageUrl = item.image.startsWith('http')
+  ? item.image
+  : `https://ug-backend-wkk1.onrender.com${item.image}`;
       product.innerHTML = `
-        <div class="product-image" style="background-image: url('https://ug-backend-wkk1.onrender.com${item.image}'); background-size: cover;"></div>
+        <div class="product-image" style="background-image: url('${imageUrl}'); background-size: cover;"></div>
         <h3>${item.name}</h3>
         <p>$${item.price}</p>
         <p class="availability">Availability: ${item.quantity}</p>  
