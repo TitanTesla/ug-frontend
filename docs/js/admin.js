@@ -287,7 +287,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Get inventory for top 3 products
       const topInventory = await fetch(
-        'http://localhost:3000/api/products'
+        'https://ug-backend-wkk1.onrender.com/api/products'
       ).then(res => res.json())
       const inventoryMap = {}
       topInventory.forEach(p => {
