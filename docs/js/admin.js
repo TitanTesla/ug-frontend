@@ -664,11 +664,41 @@ new Chart(pieCtx, {
         return
       }
 
-      if (!quantity && !price) {
-        alert('Please provide either a new Quantity, Price, or both.')
-        return
-      }
+      const imageFile = imageInput.files[0]
 
+if (!quantity && !price && !imageFile) {
+  alert('Please provide either a new Quantity, Price, Upload or one of those/all.')
+  return
+}
+
+const formData = new FormData()
+formData.append('name', name)
+formData.append('category', category)
+if (quantity) formData.append('quantity', quantity)
+if (price) formData.append('price', price)
+if (imageFile) formData.append('image', imageFile)
+
+try {
+  const response = await fetch(
+    `https://ug-backend-wkk1.onrender.com/api/products/update`,
+    {
+      method: 'PUT',
+      body: formData
+    }
+  )
+
+  const result = await response.json()
+  if (!response.ok)
+    throw new Error(result.message || 'Failed to update product.')
+
+  alert('Product updated successfully.')
+  await fetchInventoryProducts()
+  inventoryForm.reset()
+  imagePreview.style.display = 'none'
+} catch (err) {
+  console.error('Update error:', err)
+  alert('❌ Failed to update product. Please try again.')
+}
       try {
         const response = await fetch(
           `https://ug-backend-wkk1.onrender.com/api/products?name=${encodeURIComponent(
