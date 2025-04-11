@@ -730,48 +730,50 @@ document
     }
   
     function applyInventoryFilters () {
-      const query = document.getElementById('searchInventory').value.toLowerCase()
-      const sortField = document.getElementById('sortInventoryField').value
-      const sortOrder = document.querySelector(
-        'input[name="sortInventoryOrder"]:checked'
-      ).value
-  
-      let filtered = inventoryProducts.filter(p =>
-        p.name.toLowerCase().includes(query)
-      )
-  
-      filtered.sort((a, b) => {
-        const valA = sortField === 'qty' ? a.quantity : a.price
-        const valB = sortField === 'qty' ? b.quantity : b.price
-        return sortOrder === 'asc' ? valA - valB : valB - valA
-      })
-  
-      renderInventoryTable(filtered)
-  
-      document
-        .getElementById('download-inventory')
-        .addEventListener('click', () => {
-          const rows = document.querySelectorAll('#inventory-table-body tr')
-          const data = Array.from(rows).map(row => {
-            const cells = row.querySelectorAll('td')
-            return {
-              ProductID: cells[0].textContent,
-              ProductName: cells[1].textContent,
-              Category: cells[2].textContent,
-              Quantity: cells[3].textContent,
-              Price: cells[4].textContent
-            }
-          })
-  
-          downloadCSV(data, 'inventory.csv', [
-            'ProductID',
-            'ProductName',
-            'Category',
-            'Quantity',
-            'Price'
-          ])
+        const query = document.getElementById('searchInventory').value.toLowerCase()
+        const sortField = document.getElementById('sortInventoryField').value
+        const sortOrder = document.querySelector(
+          'input[name="sortInventoryOrder"]:checked'
+        ).value
+      
+        let filtered = inventoryProducts.filter(p =>
+          p.name.toLowerCase().includes(query)
+        )
+      
+        filtered.sort((a, b) => {
+          const valA = sortField === 'qty' ? a.quantity : a.price
+          const valB = sortField === 'qty' ? b.quantity : b.price
+          return sortOrder === 'asc' ? valA - valB : bVal - valA
         })
-    }
+      
+        // ✅ Render the filtered data immediately
+        renderInventoryTable(filtered)
+      
+        // 🛑 This block is unrelated — don't nest render logic here
+        document
+          .getElementById('download-inventory')
+          .addEventListener('click', () => {
+            const rows = document.querySelectorAll('#inventory-table-body tr')
+            const data = Array.from(rows).map(row => {
+              const cells = row.querySelectorAll('td')
+              return {
+                ProductID: cells[0].textContent,
+                ProductName: cells[1].textContent,
+                Category: cells[2].textContent,
+                Quantity: cells[3].textContent,
+                Price: cells[4].textContent
+              }
+            })
+      
+            downloadCSV(data, 'inventory.csv', [
+              'ProductID',
+              'ProductName',
+              'Category',
+              'Quantity',
+              'Price'
+            ])
+          })
+      }
   
     // === EVENT LISTENERS ===
     document
