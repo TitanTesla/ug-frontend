@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       itemEl.innerHTML = `
         <div class="image-box">
-          <img src="http://localhost:3000${item.image}" alt="${item.name}" />
+          <img src="http://ug-backend-wkk1.onrender.com${item.image}" alt="${item.name}" />
         </div>
         <div class="item-info">
           <p>${item.name}</p>
@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       try {
-        const response = await fetch("http://localhost:3000/api/checkout", {
+        const response = await fetch("http://ug-backend-wkk1.onrender.com/api/checkout", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
