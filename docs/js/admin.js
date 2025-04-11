@@ -699,7 +699,6 @@ new Chart(pieCtx, {
       console.error('Update error:', err)
       alert('❌ Failed to update product. Please try again.')
     }
-  })
 
   // === INVENTORY FILTER & SORT ===
   let inventoryProducts = []
