@@ -698,35 +698,7 @@ try {
 } catch (err) {
   console.error('Update error:', err)
   alert('❌ Failed to update product. Please try again.')
-}
-      try {
-        const response = await fetch(
-          `https://ug-backend-wkk1.onrender.com/api/products?name=${encodeURIComponent(
-            name
-          )}&category=${encodeURIComponent(category)}`,
-          {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              quantity: quantity ? Number(quantity) : undefined,
-              price: price ? Number(price) : undefined
-            })
-          }
-        )
-
-        const result = await response.json()
-        if (!response.ok)
-          throw new Error(result.message || 'Failed to update product.')
-
-        alert('Product updated successfully.')
-        await fetchInventoryProducts()
-        inventoryForm.reset()
-        imagePreview.style.display = 'none'
-      } catch (err) {
-        console.error('Update error:', err)
-        alert('❌ Failed to update product. Please try again.')
-      }
-    })
+})
 
   // === INVENTORY FILTER & SORT ===
   let inventoryProducts = []
