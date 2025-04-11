@@ -647,7 +647,7 @@ new Chart(pieCtx, {
         console.error('Error deleting product:', error)
         alert('❌ Product not found or error occurred.')
       }
-    })
+    }
 
   // === UPDATE PRODUCT ===
  document
