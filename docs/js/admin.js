@@ -288,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Get inventory for top 3 products
       const topInventory = await fetch(
-        `${BASE_URL}0/api/products`
+        `${BASE_URL}/api/products`
       ).then(res => res.json())
       const inventoryMap = {}
       topInventory.forEach(p => {
@@ -438,7 +438,7 @@ new Chart(pieCtx, {
 
     async function fetchSales () {
       try {
-        const res = await fetch('${BASE_URL}/api/sales')
+        const res = await fetch(`${BASE_URL}/api/sales`)
         salesData = await res.json()
         renderSales(salesData)
       } catch (err) {
