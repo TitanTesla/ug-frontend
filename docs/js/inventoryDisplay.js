@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function fetchProducts() {
     try {
-      const response = await fetch('https://ug-backend-wkk1.onrender.com/api/products');
+      const response = await fetch('http://localhost:3000/api/products');
       return await response.json();
     } catch (error) {
       console.error('Error fetching products:', error);
@@ -51,14 +51,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const product = document.createElement("div");
       product.className = "product";
 
-      const imageUrl = item.image.startsWith('http')
-  ? item.image
-  : `https://ug-backend-wkk1.onrender.com${item.image}`;
       product.innerHTML = `
-        <div class="product-image" style="background-image: url('${imageUrl}'); background-size: cover;"></div>
+        <div class="product-image" style="background-image: url('http://localhost:3000${item.image}'); background-size: cover;"></div>
         <h3>${item.name}</h3>
         <p>$${item.price}</p>
-        <p class="availability">Availability: ${item.quantity}</p>  
+        <p class="availability">Availability: ${item.quantity}</p>
         <button>Add to cart</button>
       `;
 
