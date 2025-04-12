@@ -680,7 +680,7 @@ document
 
   try {
     const response = await fetch(
-      `https://ug-backend-wkk1.onrender.com/api/products/update`,
+      `https://ug-backend-wkk1.onrender.com/api/products?name=${encodeURIComponent(name)}&category=${encodeURIComponent(category)}`,
       {
         method: 'PUT',
         body: formData
