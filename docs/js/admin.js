@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 
   async function updateHighlightCards () {
-    const res = await fetch('${BASE_URL}/api/sales')
+    const res = await fetch(`${BASE_URL}/api/sales`)
     const sales = await res.json()
 
     let totalSalesQty = 0
@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
     suggestionsList.innerHTML = '' // Clear previous
 
     try {
-      const inventoryRes = await fetch('${BASE_URL}/api/products')
+      const inventoryRes = await fetch(`${BASE_URL}/api/products`)
       const inventory = await inventoryRes.json()
 
       const suggestions = []
@@ -288,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Get inventory for top 3 products
       const topInventory = await fetch(
-        '${BASE_URL}0/api/products'
+        `${BASE_URL}0/api/products`
       ).then(res => res.json())
       const inventoryMap = {}
       topInventory.forEach(p => {
@@ -566,7 +566,7 @@ new Chart(pieCtx, {
     formData.append('category', productData.category)
     formData.append('image', imageFile)
 
-    const response = await fetch('${BASE_URL}/api/products', {
+    const response = await fetch(`${BASE_URL}/api/products`, {
       method: 'POST',
       body: formData
     })
@@ -701,7 +701,7 @@ new Chart(pieCtx, {
 
   async function fetchInventoryProducts () {
     try {
-      const response = await fetch('${BASE_URL}/api/products')
+      const response = await fetch(`${BASE_URL}/api/products`)
       inventoryProducts = await response.json()
       applyInventoryFilters()
     } catch (error) {
