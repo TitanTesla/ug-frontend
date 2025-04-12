@@ -650,56 +650,57 @@ document.addEventListener('DOMContentLoaded', () => {
       })
   
     // === UPDATE PRODUCT ===
-document
-.getElementById('update-product-btn')
-.addEventListener('click', async e => {
-  e.preventDefault()
-  const name = document.getElementById('product-name').value.trim()
-  const category = document.getElementById('Product-category').value
-  const quantity = document.getElementById('product-qty').value.trim()
-  const price = document.getElementById('product-price').value.trim()
+    document
+  .getElementById('update-product-btn')
+  .addEventListener('click', async e => {
+    e.preventDefault()
+    const name = document.getElementById('product-name').value.trim()
+    const category = document.getElementById('Product-category').value
+    const quantity = document.getElementById('product-qty').value.trim()
+    const price = document.getElementById('product-price').value.trim()
+    const imageFile = imageInput.files[0]
 
-  if (!name || !category) {
-    alert('Please enter Product Name and select Category to update.')
-    return
-  }
+    if (!name || !category) {
+      alert('Please enter Product Name and select Category to update.')
+      return
+    }
 
-  const imageFile = imageInput.files[0]
+    if (!quantity && !price && !imageFile) {
+      alert('Please provide a Quantity, Price, or Image to update.')
+      return
+    }
 
-  if (!quantity && !price && !imageFile) {
-    alert('Please provide either a new Quantity, Price, Upload Image — or any combination of them')
-    return
-  }
+    const formData = new FormData()
+    formData.append('name', name)
+    formData.append('category', category)
+    if (quantity) formData.append('quantity', quantity)
+    if (price) formData.append('price', price)
+    if (imageFile) formData.append('image', imageFile)
 
-  const formData = new FormData()
-  formData.append('name', name)
-  formData.append('category', category)
-  if (quantity) formData.append('quantity', quantity)
-  if (price) formData.append('price', price)
-  if (imageFile) formData.append('image', imageFile)
+    const endpoint = imageFile
+      ? 'https://ug-backend-wkk1.onrender.com/api/products/update'
+      : `https://ug-backend-wkk1.onrender.com/api/products?name=${encodeURIComponent(name)}&category=${encodeURIComponent(category)}`
 
-  try {
-    const response = await fetch(
-      `https://ug-backend-wkk1.onrender.com/api/products?name=${encodeURIComponent(name)}&category=${encodeURIComponent(category)}`,
-      {
+    try {
+      const response = await fetch(endpoint, {
         method: 'PUT',
         body: formData
-      }
-    )
+      })
 
-    const result = await response.json()
-    if (!response.ok)
-      throw new Error(result.message || 'Failed to update product.')
+      const result = await response.json()
+      if (!response.ok)
+        throw new Error(result.message || 'Failed to update product.')
 
-    alert('Product updated successfully.')
-    await fetchInventoryProducts()
-    inventoryForm.reset()
-    imagePreview.style.display = 'none'
-  } catch (err) {
-    console.error('Update error:', err)
-    alert('❌ Failed to update product. Please try again.')
-  }
-})  // ✅ THIS closes the addEventListener correctly!
+      alert('Product updated successfully.')
+      await fetchInventoryProducts()
+      inventoryForm.reset()
+      imagePreview.style.display = 'none'
+    } catch (err) {
+      console.error('Update error:', err)
+      alert('❌ Failed to update product. Please try again.')
+    }
+  })
+  // ✅ THIS closes the addEventListener correctly!
   
     // === INVENTORY FILTER & SORT ===
     let inventoryProducts = []
