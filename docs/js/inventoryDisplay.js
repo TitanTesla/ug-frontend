@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const BASE_URL = 'https://ug-backend-wkk1.onrender.com';
   const searchInput = document.querySelector('#search-form input[type="search"]');
   const cartCountElement = document.getElementById("cart-count");
   const sections = {
@@ -11,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function fetchProducts() {
     try {
-      const response = await fetch('http://localhost:3000/api/products');
+      const response = await fetch(`${BASE_URL}/api/products`);
       return await response.json();
     } catch (error) {
       console.error('Error fetching products:', error);
@@ -52,8 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
       product.className = "product";
 
       product.innerHTML = `
-        <div class="product-image" style="background-image: url('http://localhost:3000${item.image}'); background-size: cover;"></div>
-        <h3>${item.name}</h3>
+        <div class="product-image" style="background-image: url('${BASE_URL}${item.image}'); background-size: cover;"></div>        <h3>${item.name}</h3>
         <p>$${item.price}</p>
         <p class="availability">Availability: ${item.quantity}</p>
         <button>Add to cart</button>
