@@ -570,7 +570,13 @@ new Chart(pieCtx, {
       method: 'POST',
       body: formData
     })
-    return await response.json()
+    const data = await response.json();
+
+   if (!response.ok) {
+     throw new Error(data.error || 'Server error');
+  }
+
+     return data;
   }
 
   // === PREVIEW IMAGE ON FILE SELECT ===
